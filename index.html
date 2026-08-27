@@ -3,149 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#07111f">
 <title>Amir Marketplace</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f5f6f8;color:#171717;
-padding-bottom:75px
-}
+body{font-family:Arial,sans-serif;background:#f3f6f9;color:#101828;padding-bottom:75px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
 header{
 position:sticky;top:0;z-index:100;
-background:#111;color:white;
-padding:13px 16px;
-display:flex;align-items:center;
-justify-content:space-between
+height:64px;background:#07111f;color:#fff;
+display:flex;align-items:center;justify-content:space-between;
+padding:0 15px
 }
-.logo{font-size:21px;font-weight:900}
+.logo{font-size:21px;font-weight:900;color:white;text-decoration:none}
 .logo span{color:#25d366}
-.post{
-border:0;background:#25d366;color:white;
-padding:10px 14px;border-radius:8px;
-font-weight:bold
-}
-.container{max-width:1100px;margin:auto;padding:15px}
+.headbuttons{display:flex;gap:7px}
+.headbuttons button{border:0;border-radius:9px;padding:9px 12px;background:#263449;color:#fff;font-weight:bold}
+.headbuttons .sell{background:#25d366}
+
 .hero{
-background:linear-gradient(135deg,#111,#292929);
-color:white;padding:23px 18px;border-radius:16px;
-margin-bottom:15px
+max-width:1100px;margin:15px auto;padding:28px 20px;
+border-radius:18px;background:linear-gradient(135deg,#07111f,#263b55);
+color:#fff;display:flex;justify-content:space-between;gap:20px;align-items:end
 }
-.hero h1{font-size:26px;margin-bottom:7px}
-.hero p{color:#ddd}
+.eyebrow{font-size:11px;color:#8bf0ad;font-weight:bold}
+.hero h1{font-size:36px;margin:8px 0}
+.hero p{color:#d6dde6;line-height:1.5}
+.heroBtns{display:flex;gap:8px}
+.green{background:#25d366!important;color:#fff!important;border:0!important}
+.mainbtn{background:#25d366;color:white;border:0;border-radius:9px;padding:12px 15px;font-weight:900}
+.outline{background:transparent;color:#fff;border:1px solid #ffffff55;border-radius:9px;padding:12px 15px;font-weight:bold}
+
 .search{
-width:100%;margin-top:16px;padding:14px;
-border:0;border-radius:10px;font-size:15px
+max-width:1100px;margin:auto;background:white;padding:12px;
+border-radius:14px;box-shadow:0 2px 10px #0001
 }
+.search input{width:100%;padding:14px;border:1px solid #ddd;border-radius:9px}
+.filters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:9px}
+.filters select{padding:11px;border:1px solid #ddd;border-radius:8px;background:#fff}
+
 .categories{
-display:flex;gap:8px;overflow:auto;padding:3px 0 15px
+max-width:1100px;margin:14px auto;display:flex;gap:8px;overflow:auto
 }
-.category{
-white-space:nowrap;border:0;background:white;
-padding:9px 14px;border-radius:20px;
-box-shadow:0 2px 6px #0001;font-weight:bold
+.cat{border:0;background:#fff;padding:9px 13px;border-radius:20px;white-space:nowrap;font-weight:bold}
+.cat.active{background:#07111f;color:#fff}
+
+.heading{
+max-width:1100px;margin:15px auto 10px;
+display:flex;justify-content:space-between;align-items:center
 }
-.category.active{background:#111;color:white}
+.heading h2{font-size:20px}
+.heading p{font-size:12px;color:#667085;margin-top:3px}
+.saved{border:0;background:#fff;padding:9px 12px;border-radius:8px;font-weight:bold}
+
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(165px,1fr));
-gap:13px
+max-width:1100px;margin:auto;
+display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:13px
 }
+
 .card{
-background:white;border-radius:13px;
-overflow:hidden;box-shadow:0 2px 8px #00000012
+background:#fff;border-radius:14px;overflow:hidden;
+box-shadow:0 2px 10px #0001;position:relative
 }
-.card img{
-width:100%;height:175px;
-object-fit:cover;background:#eee
+.icon{
+height:135px;background:#edf1f5;
+display:flex;align-items:center;justify-content:center;font-size:55px
+}
+.badge{
+position:absolute;top:8px;left:8px;background:#fff;
+padding:4px 7px;border-radius:6px;font-size:10px;font-weight:bold
+}
+.heart{
+position:absolute;right:8px;top:8px;width:34px;height:34px;
+border:0;border-radius:50%;background:#fff;font-size:18px
 }
 .details{padding:11px}
-.title{font-weight:800;font-size:14px}
-.price{
-font-size:18px;font-weight:900;
-color:#e53900;margin-top:6px
-}
-.meta{font-size:11px;color:#777;margin-top:4px}
-.buttons{
-display:flex;gap:6px;padding:10px;
-border-top:1px solid #eee
-}
-.btn{
-flex:1;padding:10px;border:0;
-border-radius:7px;font-weight:bold
-}
+.title{font-weight:900;min-height:36px}
+.price{font-size:18px;font-weight:950;color:#e13b16;margin-top:6px}
+.meta{font-size:11px;color:#667085;margin-top:5px;line-height:1.4}
+.actions{display:flex;gap:6px;padding:9px;border-top:1px solid #eee}
+.actions button{flex:1;border:0;border-radius:7px;padding:9px;font-weight:bold}
 .buy{background:#25d366;color:white}
-.share{background:#1479ff;color:white}
+.offer{background:#07111f;color:white}
+
+.empty{
+grid-column:1/-1;background:white;border-radius:14px;
+padding:50px;text-align:center;color:#667085
+}
+
+footer{
+position:fixed;bottom:0;left:0;right:0;height:68px;
+background:#fff;border-top:1px solid #ddd;
+display:flex;justify-content:space-around;align-items:center;z-index:100
+}
+footer button{border:0;background:none;font-weight:bold;font-size:12px}
+footer span{display:block;margin-top:3px}
+
 .modal{
-display:none;position:fixed;inset:0;
-background:#0009;z-index:300;
-align-items:center;justify-content:center;
-padding:15px
+display:none;position:fixed;inset:0;background:#0009;
+z-index:300;align-items:center;justify-content:center;padding:14px
 }
-.modalBox{
-background:white;border-radius:15px;
-padding:19px;width:100%;max-width:440px;
-max-height:92vh;overflow:auto
-}
-.modalBox h2{margin-bottom:12px}
-.field{margin:12px 0}
-.field label{
-display:block;font-size:12px;
-font-weight:bold;margin-bottom:5px
-}
-.field input,.field textarea,.field select{
-width:100%;padding:11px;
-border:1px solid #ccc;border-radius:8px
-}
-.total{
-background:#f1f1f1;padding:12px;
-border-radius:9px;margin:10px 0
-}
-.total div{
-display:flex;justify-content:space-between;
-margin:5px 0
-}
-.total .grand{
-font-size:18px;font-weight:900;
-border-top:1px solid #ccc;padding-top:8px
-}
-.payment{
-border:2px solid #25d366;
-border-radius:10px;padding:12px;
-margin:12px 0
-}
-.mpesa{
-font-size:18px;font-weight:900;color:#138a45
-}
-.action{
-width:100%;padding:13px;border:0;
-border-radius:8px;background:#111;
-color:white;font-weight:bold
+.panel{
+width:100%;max-width:470px;max-height:92vh;overflow:auto;
+background:#fff;border-radius:17px;padding:20px;position:relative
 }
 .close{
-background:#ddd;color:#222;
-margin-top:7px
+position:absolute;right:12px;top:10px;
+border:0;background:#eee;border-radius:50%;
+width:32px;height:32px;font-size:22px
 }
-.notice{
-background:#fff8df;
-padding:10px;border-radius:8px;
-font-size:12px;color:#765900
+.panel h2{margin-bottom:7px}
+.panel label{
+display:block;font-size:12px;font-weight:bold;margin:12px 0
 }
-footer{
-position:fixed;bottom:0;left:0;right:0;
-height:65px;background:white;
-border-top:1px solid #ddd;
-display:flex;justify-content:space-around;
-align-items:center;z-index:150
+.panel input,.panel select,.panel textarea{
+display:block;width:100%;margin-top:5px;
+padding:11px;border:1px solid #ccd3db;border-radius:8px
 }
-footer button{
-border:0;background:none;font-weight:bold
+
+.calc{background:#f1f3f5;border-radius:10px;padding:12px;margin:12px 0}
+.calc div{display:flex;justify-content:space-between;margin:7px 0}
+.calc .total{border-top:1px solid #ccc;padding-top:10px;font-size:18px}
+
+.payment{
+border:2px solid #25d366;border-radius:10px;padding:13px;margin:12px 0
 }
-.empty{
-grid-column:1/-1;
-text-align:center;padding:40px;color:#777
+.payment strong{color:#138a43;font-size:17px}
+.payment p{font-size:12px;color:#667085;margin-top:5px}
+.full{width:100%}
+.small{font-size:12px;color:#667085;line-height:1.5}
+
+.countryChoice{
+width:100%;text-align:left;padding:15px;margin:6px 0;
+background:white;border:1px solid #ddd;border-radius:10px;
+font-size:17px;font-weight:bold
+}
+.countryChoice small{display:block;color:#667085;margin-top:4px;font-weight:normal}
+
+@media(max-width:650px){
+.hero{margin:10px 12px;display:block}
+.hero h1{font-size:29px}
+.heroBtns{margin-top:15px}
+.search,.heading,.grid{margin-left:12px;margin-right:12px}
+.filters{grid-template-columns:1fr 1fr}
+.filters select:last-child{grid-column:1/-1}
+.grid{grid-template-columns:repeat(2,1fr)}
+.icon{height:120px}
+.headbuttons button:first-child{display:none}
 }
 </style>
 </head>
@@ -153,427 +160,974 @@ text-align:center;padding:40px;color:#777
 <body>
 
 <header>
-<div class="logo">AMIR<span> MARKET</span></div>
-<button class="post" onclick="openSell()">+ Sell</button>
+<a class="logo" href="#">AMIR <span>MARKET</span></a>
+
+<div class="headbuttons">
+<button onclick="chooseCountry()">🌍 Kenya / Qatar</button>
+<button class="sell" onclick="openSell()">＋ Sell</button>
+</div>
 </header>
 
-<div class="container">
 
 <section class="hero">
-<h1>Buy & Sell Easily</h1>
-<p>Find products, contact the admin and complete your purchase securely.</p>
-<input id="search" class="search"
-placeholder="🔎 Search phones, cars, clothes, furniture..."
-oninput="render()">
+
+<div>
+<div class="eyebrow">🇰🇪 KENYA • 🇶🇦 QATAR</div>
+<h1>Buy. Sell. Connect.</h1>
+<p>Buy and sell products, vehicles, property, jobs and services.</p>
+</div>
+
+<div class="heroBtns">
+<button class="mainbtn" onclick="openSell()">🚀 Post Item</button>
+<button class="outline" onclick="support()">💬 Admin</button>
+</div>
+
 </section>
 
-<div class="categories">
-<button class="category active" onclick="setCategory('All',this)">All</button>
-<button class="category" onclick="setCategory('Phones',this)">📱 Phones</button>
-<button class="category" onclick="setCategory('Vehicles',this)">🚗 Vehicles</button>
-<button class="category" onclick="setCategory('Electronics',this)">💻 Electronics</button>
-<button class="category" onclick="setCategory('Clothes',this)">👕 Clothes</button>
-<button class="category" onclick="setCategory('Furniture',this)">🛋️ Furniture</button>
-<button class="category" onclick="setCategory('Property',this)">🏠 Property</button>
-</div>
 
-<div id="grid" class="grid"></div>
+<section class="search">
 
-</div>
+<input id="search" placeholder="🔎 Search phones, cars, houses, jobs..." oninput="render()">
 
-<!-- SELL MODAL -->
+<div class="filters">
 
-<div id="sellModal" class="modal">
-<div class="modalBox">
-
-<h2>Sell Your Item</h2>
-
-<div class="notice">
-Your item will be submitted to the admin for approval.
-The marketplace adds a 10% admin fee to your asking price.
-</div>
-
-<div class="field">
-<label>Product Name</label>
-<input id="sellName" placeholder="Example: iPhone 15 Pro">
-</div>
-
-<div class="field">
-<label>Category</label>
-<select id="sellCategory">
-<option>Phones</option>
-<option>Vehicles</option>
-<option>Electronics</option>
-<option>Clothes</option>
-<option>Furniture</option>
-<option>Property</option>
-<option>Other</option>
+<select id="country" onchange="render()">
+<option>All</option>
+<option>Kenya</option>
+<option>Qatar</option>
 </select>
-</div>
 
-<div class="field">
-<label>Description</label>
-<textarea id="sellDescription" rows="3"
-placeholder="Describe your item"></textarea>
-</div>
+<select id="location" onchange="render()">
+<option>All</option>
+<option>Nairobi</option>
+<option>Mombasa</option>
+<option>Nakuru</option>
+<option>Kisumu</option>
+<option>Eldoret</option>
+<option>Narok</option>
+<option>Doha</option>
+<option>Lusail</option>
+<option>Al Rayyan</option>
+<option>Al Wakrah</option>
+<option>Al Khor</option>
+</select>
 
-<div class="field">
-<label>Your Asking Price — KSh</label>
-<input id="sellPrice" type="number" min="1"
-oninput="calculateSell()">
-</div>
-
-<div class="total">
-<div><span>Your price</span><b id="sellerPrice">KSh 0</b></div>
-<div><span>Admin fee 10%</span><b id="adminFee">KSh 0</b></div>
-<div class="grand"><span>Customer price</span><b id="customerPrice">KSh 0</b></div>
-</div>
-
-<div class="field">
-<label>Your Name</label>
-<input id="sellerName" placeholder="Seller name">
-</div>
-
-<div class="field">
-<label>Your Phone</label>
-<input id="sellerPhone" placeholder="07XXXXXXXX">
-</div>
-
-<div class="field">
-<label>Product Image</label>
-<input id="sellImage" type="file" accept="image/*">
-</div>
-
-<button class="action" onclick="submitListing()">
-SUBMIT FOR ADMIN APPROVAL
-</button>
-
-<button class="action close" onclick="closeModal('sellModal')">
-CANCEL
-</button>
+<select id="sort" onchange="render()">
+<option value="new">Newest</option>
+<option value="low">Lowest Price</option>
+<option value="high">Highest Price</option>
+</select>
 
 </div>
+</section>
+
+
+<div class="categories" id="categories"></div>
+
+
+<section class="heading">
+
+<div>
+<h2>🔥 Latest Listings</h2>
+<p id="count"></p>
 </div>
 
-<!-- CHECKOUT MODAL -->
+<button class="saved" onclick="showSaved()">❤️ Saved</button>
 
-<div id="checkoutModal" class="modal">
-<div class="modalBox">
+</section>
 
-<h2>Checkout</h2>
 
-<div id="checkoutProduct"></div>
+<section class="grid" id="products"></section>
 
-<div class="total">
-<div><span>Product</span><b id="checkoutBase"></b></div>
-<div><span>Admin fee</span><b id="checkoutFee"></b></div>
-<div class="grand"><span>Total</span><b id="checkoutTotal"></b></div>
-</div>
-
-<div class="field">
-<label>Your Name</label>
-<input id="buyerName" placeholder="Full name">
-</div>
-
-<div class="field">
-<label>M-PESA Phone Number</label>
-<input id="buyerPhone" placeholder="07XXXXXXXX">
-</div>
-
-<div class="payment">
-<div class="mpesa">🟢 M-PESA PAYMENT</div>
-<p style="font-size:12px;margin-top:7px">
-Enter your M-PESA number above. In the production version,
-the secure backend will send an STK Push to your phone.
-</p>
-</div>
-
-<div class="field">
-<label>M-PESA Transaction Reference</label>
-<input id="transactionRef"
-placeholder="Example: QJK1234567">
-</div>
-
-<button class="action" onclick="submitOrder()">
-CONFIRM PAYMENT
-</button>
-
-<button class="action close"
-onclick="closeModal('checkoutModal')">
-CANCEL
-</button>
-
-</div>
-</div>
 
 <footer>
-<button onclick="window.scrollTo(0,0)">🏠 Home</button>
-<button onclick="openSell()">➕ Sell</button>
-<button onclick="contactAdmin()">💬 Admin</button>
-<button onclick="shareSite()">📤 Share</button>
+
+<button onclick="window.scrollTo(0,0)">
+🏠<span>Home</span>
+</button>
+
+<button onclick="openSell()">
+➕<span>Sell</span>
+</button>
+
+<button onclick="showSaved()">
+❤️<span>Saved</span>
+</button>
+
+<button onclick="support()">
+💬<span>Admin</span>
+</button>
+
+<button onclick="share()">
+📤<span>Share</span>
+</button>
+
 </footer>
+
+
+<!-- SELL -->
+
+<div class="modal" id="sellModal">
+
+<div class="panel">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>📦 Post Your Item</h2>
+
+<p class="small">
+No image is required. Your listing will be stored in this browser.
+</p>
+
+<label>
+Item Name
+<input id="itemName" placeholder="Toyota Premio 2018">
+</label>
+
+<label>
+Category
+<select id="itemCategory"></select>
+</label>
+
+<label>
+Country
+<select id="itemCountry" onchange="calculate()">
+<option>Kenya</option>
+<option>Qatar</option>
+</select>
+</label>
+
+<label>
+Location
+<select id="itemLocation"></select>
+</label>
+
+<label>
+Description
+<textarea id="itemDescription" rows="3" placeholder="Describe your item"></textarea>
+</label>
+
+<label>
+Seller Price
+<input id="itemPrice" type="number" oninput="calculate()" placeholder="1000">
+</label>
+
+
+<div class="calc">
+
+<div>
+<span>Seller Price</span>
+<b id="base"></b>
+</div>
+
+<div>
+<span>Admin Fee 10%</span>
+<b id="fee"></b>
+</div>
+
+<div class="total">
+<span>Customer Price</span>
+<b id="total"></b>
+</div>
+
+</div>
+
+
+<label>
+Seller Name
+<input id="sellerName" placeholder="Your name">
+</label>
+
+<label>
+WhatsApp / Phone
+<input id="sellerPhone" placeholder="07XXXXXXXX / +974XXXXXXXX">
+</label>
+
+
+<button class="mainbtn full" onclick="publish()">
+🚀 PUBLISH LISTING
+</button>
+
+</div>
+</div>
+
+
+<!-- BUY -->
+
+<div class="modal" id="buyModal">
+
+<div class="panel">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<div id="buyInfo"></div>
+
+<div class="calc">
+
+<div>
+<span>Seller Price</span>
+<b id="buyBase"></b>
+</div>
+
+<div>
+<span>Admin Fee 10%</span>
+<b id="buyFee"></b>
+</div>
+
+<div class="total">
+<span>Total</span>
+<b id="buyTotal"></b>
+</div>
+
+</div>
+
+<label>
+Buyer Name
+<input id="buyerName">
+</label>
+
+<label>
+Buyer Phone
+<input id="buyerPhone">
+</label>
+
+<div class="payment">
+
+<strong id="paymentTitle">🟢 M-PESA</strong>
+
+<p id="paymentText">
+For Kenya use M-PESA and enter the payment reference below.
+</p>
+
+</div>
+
+<label>
+Payment Reference
+<input id="paymentRef" placeholder="Transaction reference">
+</label>
+
+<button class="mainbtn full" onclick="order()">
+✅ CONFIRM ORDER
+</button>
+
+<p class="small">
+The order will be sent to the admin through WhatsApp.
+Real automatic payment collection requires a secure backend.
+</p>
+
+</div>
+</div>
+
+
+<!-- OFFER -->
+
+<div class="modal" id="offerModal">
+
+<div class="panel">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>💬 Make an Offer</h2>
+
+<div id="offerInfo"></div>
+
+<label>
+Your Offer
+<input id="offerPrice" type="number">
+</label>
+
+<label>
+Your Name
+<input id="offerName">
+</label>
+
+<label>
+Phone
+<input id="offerPhone">
+</label>
+
+<button class="mainbtn full" onclick="sendOffer()">
+📨 SEND OFFER
+</button>
+
+</div>
+</div>
+
+
+<!-- COUNTRY -->
+
+<div class="modal" id="countryModal">
+
+<div class="panel">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🌍 Choose Country</h2>
+
+<button class="countryChoice" onclick="setCountry('Kenya')">
+🇰🇪 Kenya
+<small>KSh • M-PESA</small>
+</button>
+
+<button class="countryChoice" onclick="setCountry('Qatar')">
+🇶🇦 Qatar
+<small>QAR • Qatar payment</small>
+</button>
+
+</div>
+</div>
+
 
 <script>
 
-const CONFIG={
-adminEmail:"abdiabdulmohammed50@gmail.com",
-adminPhone:"254795653284",
-adminFee:0.10
-};
+const ADMIN = "254795653284";
 
-let selectedCategory="All";
-let selectedProduct=null;
+const FEE = 0.10;
 
-let products=JSON.parse(
-localStorage.getItem("amir_products")||"[]"
-);
 
-if(products.length===0){
-
-products=[
-{
-id:1,
-name:"Men's Outdoor Cap",
-category:"Clothes",
-description:"Quality outdoor cap",
-basePrice:1200,
-customerPrice:1320,
-image:"",
-approved:true
-}
+const categories = [
+"All",
+"Phones",
+"Vehicles",
+"Property",
+"Electronics",
+"Clothes",
+"Furniture",
+"Jobs",
+"Services",
+"Farm",
+"Other"
 ];
 
-saveProducts();
+
+const locations = [
+"Nairobi",
+"Mombasa",
+"Nakuru",
+"Kisumu",
+"Eldoret",
+"Narok",
+"Doha",
+"Lusail",
+"Al Rayyan",
+"Al Wakrah",
+"Al Khor",
+"Other"
+];
+
+
+const icons = {
+Phones:"📱",
+Vehicles:"🚗",
+Property:"🏠",
+Electronics:"💻",
+Clothes:"👕",
+Furniture:"🛋️",
+Jobs:"💼",
+Services:"🛠️",
+Farm:"🌾",
+Other:"📦"
+};
+
+
+let listings =
+JSON.parse(
+localStorage.getItem("amirListings")
+|| "null"
+);
+
+
+let favorites =
+JSON.parse(
+localStorage.getItem("amirFavorites")
+|| "[]"
+);
+
+
+let category="All";
+
+let selected=null;
+
+
+if(!listings){
+
+listings=[
+
+{
+id:1,
+name:"Samsung Galaxy Phone",
+category:"Phones",
+country:"Kenya",
+location:"Nairobi",
+price:35000,
+description:"Good condition smartphone.",
+seller:"Verified Seller",
+created:Date.now()
+},
+
+{
+id:2,
+name:"Toyota Premio 2018",
+category:"Vehicles",
+country:"Kenya",
+location:"Nakuru",
+price:1250000,
+description:"Clean family car.",
+seller:"Verified Seller",
+created:Date.now()-1000
+},
+
+{
+id:3,
+name:"iPhone 15 Pro",
+category:"Phones",
+country:"Qatar",
+location:"Doha",
+price:2500,
+description:"Excellent condition.",
+seller:"Verified Seller",
+created:Date.now()-2000
+},
+
+{
+id:4,
+name:"Modern Apartment",
+category:"Property",
+country:"Qatar",
+location:"Al Rayyan",
+price:3500,
+description:"Modern apartment.",
+seller:"Verified Seller",
+created:Date.now()-3000
 }
 
-function saveProducts(){
+];
+
+save();
+
+}
+
+
+function save(){
+
 localStorage.setItem(
-"amir_products",
-JSON.stringify(products)
-);
-}
-
-function money(value){
-return "KSh "+Number(value).toLocaleString(
-"en-KE",
-{minimumFractionDigits:0}
-);
-}
-
-function openSell(){
-document.getElementById("sellModal").style.display="flex";
-}
-
-function closeModal(id){
-document.getElementById(id).style.display="none";
-}
-
-function calculateSell(){
-
-let price=Number(
-document.getElementById("sellPrice").value
-)||0;
-
-let fee=price*CONFIG.adminFee;
-let total=price+fee;
-
-document.getElementById("sellerPrice").textContent=money(price);
-document.getElementById("adminFee").textContent=money(fee);
-document.getElementById("customerPrice").textContent=money(total);
-
-}
-
-function submitListing(){
-
-let name=document.getElementById("sellName").value.trim();
-let category=document.getElementById("sellCategory").value;
-let description=document.getElementById("sellDescription").value.trim();
-let price=Number(document.getElementById("sellPrice").value);
-let seller=document.getElementById("sellerName").value.trim();
-let phone=document.getElementById("sellerPhone").value.trim();
-let file=document.getElementById("sellImage").files[0];
-
-if(!name||!price||!seller||!phone||!file){
-
-alert("Please complete all required fields and select a product image.");
-return;
-
-}
-
-let reader=new FileReader();
-
-reader.onload=function(){
-
-let product={
-
-id:Date.now(),
-name,
-category,
-description,
-basePrice:price,
-customerPrice:price+(price*CONFIG.adminFee),
-seller,
-sellerPhone:phone,
-image:reader.result,
-approved:false
-
-};
-
-products.push(product);
-saveProducts();
-
-let message=
-`NEW AMIR MARKETPLACE LISTING
-
-Item: ${name}
-Category: ${category}
-Seller price: KSh ${price}
-Admin fee: KSh ${(price*CONFIG.adminFee).toFixed(2)}
-Customer price: KSh ${(price*(1+CONFIG.adminFee)).toFixed(2)}
-
-Seller: ${seller}
-Phone: ${phone}
-
-Please review and approve this listing.`;
-
-window.open(
-"https://wa.me/"+CONFIG.adminPhone+
-"?text="+encodeURIComponent(message),
-"_blank"
+"amirListings",
+JSON.stringify(listings)
 );
 
-closeModal("sellModal");
+}
 
-alert(
-"Listing submitted successfully. The admin must approve it before it appears in the marketplace."
-);
 
-};
+function money(amount,country){
 
-reader.readAsDataURL(file);
+return (
+country==="Qatar"
+?"QAR "
+:"KSh "
+)
++
+Number(amount).toLocaleString();
 
 }
 
-function render(){
 
-let query=document.getElementById("search")
-.value.toLowerCase();
+function safe(text){
 
-let visible=products.filter(p=>{
+return String(text||"")
+.replace(/[&<>"']/g,function(x){
 
-let approved=p.approved===true;
-
-let categoryMatch=
-selectedCategory==="All"||
-p.category===selectedCategory;
-
-let searchMatch=
-(p.name+" "+p.category+" "+p.description)
-.toLowerCase()
-.includes(query);
-
-return approved&&categoryMatch&&searchMatch;
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[x];
 
 });
 
-if(!visible.length){
+}
 
-document.getElementById("grid").innerHTML=
-'<div class="empty">No products found.</div>';
 
-return;
+function openSell(){
+
+document.getElementById("sellModal")
+.style.display="flex";
+
+calculate();
 
 }
 
-document.getElementById("grid").innerHTML=
-visible.map(p=>`
 
-<div class="card">
+function closeModals(){
 
-<img src="${
-p.image||
-"https://via.placeholder.com/500x400?text=Amir+Marketplace"
-}">
+document
+.querySelectorAll(".modal")
+.forEach(function(x){
 
-<div class="details">
+x.style.display="none";
 
-<div class="title">
-${escapeHTML(p.name)}
-</div>
-
-<div class="price">
-${money(p.customerPrice)}
-</div>
-
-<div class="meta">
-${escapeHTML(p.category)}
-</div>
-
-<div class="meta">
-Includes 10% admin fee
-</div>
-
-<div class="meta">
-${escapeHTML(p.description||"")}
-</div>
-
-</div>
-
-<div class="buttons">
-
-<button class="btn buy"
-onclick="openCheckout(${p.id})">
-💳 Buy
-</button>
-
-<button class="btn share"
-onclick="shareProduct(${p.id})">
-📤 Share
-</button>
-
-</div>
-
-</div>
-
-`).join("");
+});
 
 }
 
-function openCheckout(id){
 
-selectedProduct=
-products.find(p=>p.id===id);
+function chooseCountry(){
 
-if(!selectedProduct)return;
-
-document.getElementById("checkoutProduct")
-.innerHTML=
-"<b>"+escapeHTML(selectedProduct.name)+"</b>";
-
-document.getElementById("checkoutBase")
-.textContent=
-money(selectedProduct.basePrice);
-
-document.getElementById("checkoutFee")
-.textContent=
-money(
-selectedProduct.basePrice*CONFIG.adminFee
-);
-
-document.getElementById("checkoutTotal")
-.textContent=
-money(selectedProduct.customerPrice);
-
-document.getElementById("checkoutModal")
+document.getElementById("countryModal")
 .style.display="flex";
 
 }
 
-function submitOrder(){
 
-if(!selectedProduct)return;
+function setCountry(country){
+
+document.getElementById("country")
+.value=country;
+
+closeModals();
+
+render();
+
+}
+
+
+function calculate(){
+
+let price =
+Number(
+document.getElementById("itemPrice").value
+)||0;
+
+let country =
+document.getElementById("itemCountry").value;
+
+let fee=price*FEE;
+
+let total=price+fee;
+
+
+document.getElementById("base")
+.textContent=money(price,country);
+
+document.getElementById("fee")
+.textContent=money(fee,country);
+
+document.getElementById("total")
+.textContent=money(total,country);
+
+}
+
+
+function renderCategories(){
+
+let box=
+document.getElementById("categories");
+
+box.innerHTML=
+categories.map(function(c){
+
+return `
+
+<button
+class="cat ${c===category?"active":""}"
+onclick="selectCategory('${c}')">
+
+${icons[c]||"✨"} ${c}
+
+</button>
+
+`;
+
+}).join("");
+
+}
+
+
+function selectCategory(c){
+
+category=c;
+
+renderCategories();
+
+render();
+
+}
+
+
+function render(){
+
+let query=
+document.getElementById("search")
+.value.toLowerCase();
+
+let country=
+document.getElementById("country").value;
+
+let location=
+document.getElementById("location").value;
+
+let sort=
+document.getElementById("sort").value;
+
+
+let list=
+listings.filter(function(p){
+
+return (
+
+(category==="All"||p.category===category)&&
+
+(country==="All"||p.country===country)&&
+
+(location==="All"||p.location===location)&&
+
+(
+p.name+
+p.category+
+p.description
+)
+.toLowerCase()
+.includes(query)
+
+);
+
+});
+
+
+if(sort==="low")
+list.sort((a,b)=>a.price-b.price);
+
+if(sort==="high")
+list.sort((a,b)=>b.price-a.price);
+
+if(sort==="new")
+list.sort((a,b)=>b.created-a.created);
+
+
+document.getElementById("count")
+.textContent=list.length+" listing"+(list.length===1?"":"s");
+
+
+let html="";
+
+
+list.forEach(function(p){
+
+let fee=p.price*FEE;
+
+let total=p.price+fee;
+
+let fav=favorites.includes(p.id);
+
+
+html+=`
+
+<article class="card">
+
+<div class="badge">
+${p.country==="Kenya"?"🇰🇪":"🇶🇦"}
+${p.country}
+</div>
+
+<button class="heart" onclick="favorite(${p.id})">
+${fav?"❤️":"♡"}
+</button>
+
+<div class="icon">
+${icons[p.category]||"📦"}
+</div>
+
+<div class="details">
+
+<div class="title">
+${safe(p.name)}
+</div>
+
+<div class="price">
+${money(total,p.country)}
+</div>
+
+<div class="meta">
+📍 ${safe(p.location)}
+</div>
+
+<div class="meta">
+${safe(p.category)}
+• Admin fee included
+</div>
+
+<div class="meta">
+${safe(p.description)}
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="buy"
+onclick="openBuy(${p.id})">
+💳 Buy
+</button>
+
+<button class="offer"
+onclick="openOffer(${p.id})">
+💬 Offer
+</button>
+
+</div>
+
+</article>
+
+`;
+
+});
+
+
+if(!list.length){
+
+html=`
+
+<div class="empty">
+
+🔎 No listings found.
+
+<br><br>
+
+Try another category or location.
+
+</div>
+
+`;
+
+}
+
+
+document.getElementById("products")
+.innerHTML=html;
+
+}
+
+
+function favorite(id){
+
+if(favorites.includes(id)){
+
+favorites=
+favorites.filter(x=>x!==id);
+
+}else{
+
+favorites.push(id);
+
+}
+
+localStorage.setItem(
+"amirFavorites",
+JSON.stringify(favorites)
+);
+
+render();
+
+}
+
+
+function showSaved(){
+
+let saved=
+listings.filter(p=>favorites.includes(p.id));
+
+
+if(!saved.length){
+
+alert("No saved listings yet.");
+
+return;
+
+}
+
+
+alert(
+
+saved.map(function(p){
+
+return p.name+
+" — "+
+money(
+p.price*(1+FEE),
+p.country
+);
+
+}).join("\n")
+
+);
+
+}
+
+
+function publish(){
 
 let name=
+document.getElementById("itemName")
+.value.trim();
+
+let category=
+document.getElementById("itemCategory")
+.value;
+
+let country=
+document.getElementById("itemCountry")
+.value;
+
+let location=
+document.getElementById("itemLocation")
+.value;
+
+let description=
+document.getElementById("itemDescription")
+.value.trim();
+
+let price=
+Number(
+document.getElementById("itemPrice")
+.value
+);
+
+let seller=
+document.getElementById("sellerName")
+.value.trim();
+
+let phone=
+document.getElementById("sellerPhone")
+.value.trim();
+
+
+if(!name||!price||!seller||!phone){
+
+alert(
+"Please complete item name, price, seller name and phone."
+);
+
+return;
+
+}
+
+
+listings.unshift({
+
+id:Date.now(),
+
+name:name,
+
+category:category,
+
+country:country,
+
+location:location,
+
+description:
+description||"No description provided.",
+
+price:price,
+
+seller:seller,
+
+phone:phone,
+
+created:Date.now()
+
+});
+
+
+save();
+
+closeModals();
+
+render();
+
+
+alert(
+"🎉 Listing published successfully!"
+);
+
+}
+
+
+function openBuy(id){
+
+selected=
+listings.find(p=>p.id===id);
+
+let p=selected;
+
+
+document.getElementById("buyInfo")
+.innerHTML=`
+
+<h2>💳 ${safe(p.name)}</h2>
+
+<p class="small">
+
+📍 ${safe(p.location)}
+<br>
+Seller: ${safe(p.seller)}
+
+</p>
+
+`;
+
+
+document.getElementById("buyBase")
+.textContent=money(
+p.price,
+p.country
+);
+
+
+document.getElementById("buyFee")
+.textContent=money(
+p.price*FEE,
+p.country
+);
+
+
+document.getElementById("buyTotal")
+.textContent=money(
+p.price*(1+FEE),
+p.country
+);
+
+
+if(p.country==="Kenya"){
+
+document.getElementById("paymentTitle")
+.textContent="🟢 M-PESA";
+
+document.getElementById("paymentText")
+.textContent=
+"Pay using M-PESA and enter your transaction reference.";
+
+}else{
+
+document.getElementById("paymentTitle")
+.textContent="💳 Qatar Payment";
+
+document.getElementById("paymentText")
+.textContent=
+"Qatar payment can be connected to a secure payment gateway.";
+
+}
+
+
+document.getElementById("buyModal")
+.style.display="flex";
+
+}
+
+
+function order(){
+
+let buyer=
 document.getElementById("buyerName")
 .value.trim();
 
@@ -582,145 +1136,227 @@ document.getElementById("buyerPhone")
 .value.trim();
 
 let reference=
-document.getElementById("transactionRef")
+document.getElementById("paymentRef")
 .value.trim();
 
-if(!name||!phone||!reference){
+
+if(!buyer||!phone||!reference){
 
 alert(
-"Please enter your name, M-PESA phone number and transaction reference."
+"Please enter your name, phone and payment reference."
 );
 
 return;
 
 }
 
+
+let p=selected;
+
 let message=
-`AMIR MARKETPLACE PAYMENT
 
-Product: ${selectedProduct.name}
+`AMIR MARKETPLACE ORDER
 
-Amount: KSh ${selectedProduct.customerPrice}
+Item: ${p.name}
 
-Buyer: ${name}
-Buyer Phone: ${phone}
+Country: ${p.country}
 
-M-PESA Reference: ${reference}
+Location: ${p.location}
 
-Please verify my payment and connect me with the seller.`;
+Seller Price:
+${money(p.price,p.country)}
+
+Admin Fee 10%:
+${money(p.price*FEE,p.country)}
+
+Customer Total:
+${money(p.price*(1+FEE),p.country)}
+
+Buyer:
+${buyer}
+
+Buyer Phone:
+${phone}
+
+Payment Reference:
+${reference}
+
+Please verify payment and connect me with the seller.`;
+
 
 window.open(
-"https://wa.me/"+CONFIG.adminPhone+
-"?text="+encodeURIComponent(message),
+"https://wa.me/"+
+ADMIN+
+"?text="+
+encodeURIComponent(message),
 "_blank"
 );
 
-closeModal("checkoutModal");
 
-alert(
-"Order submitted. The admin will verify the M-PESA payment."
+closeModals();
+
+}
+
+
+function openOffer(id){
+
+selected=
+listings.find(p=>p.id===id);
+
+let p=selected;
+
+
+document.getElementById("offerInfo")
+.innerHTML=`
+
+<b>${safe(p.name)}</b>
+
+<p class="small">
+
+Listed:
+${money(p.price*(1+FEE),p.country)}
+
+</p>
+
+`;
+
+
+document.getElementById("offerModal")
+.style.display="flex";
+
+}
+
+
+function sendOffer(){
+
+let price=
+Number(
+document.getElementById("offerPrice").value
+);
+
+let name=
+document.getElementById("offerName")
+.value.trim();
+
+let phone=
+document.getElementById("offerPhone")
+.value.trim();
+
+
+if(!price||!name||!phone){
+
+alert("Complete the offer form.");
+
+return;
+
+}
+
+
+let p=selected;
+
+
+let message=
+
+`AMIR MARKETPLACE OFFER
+
+Item:
+${p.name}
+
+Listed Price:
+${money(p.price*(1+FEE),p.country)}
+
+My Offer:
+${money(price,p.country)}
+
+Buyer:
+${name}
+
+Phone:
+${phone}
+
+Location:
+${p.location}
+
+Please connect me with the seller.`;
+
+
+window.open(
+"https://wa.me/"+
+ADMIN+
+"?text="+
+encodeURIComponent(message),
+"_blank"
+);
+
+
+closeModals();
+
+}
+
+
+function support(){
+
+window.open(
+"https://wa.me/"+
+ADMIN+
+"?text="+
+encodeURIComponent(
+"Hello Amir Marketplace Admin, I need assistance."
+),
+"_blank"
 );
 
 }
 
-function setCategory(category,button){
 
-selectedCategory=category;
-
-document
-.querySelectorAll(".category")
-.forEach(x=>x.classList.remove("active"));
-
-button.classList.add("active");
-
-render();
-
-}
-
-function shareProduct(id){
-
-let p=products.find(x=>x.id===id);
-
-if(!p)return;
-
-let text=
-"Check this item on Amir Marketplace: "+
-p.name+" — "+money(p.customerPrice);
+function share(){
 
 if(navigator.share){
 
 navigator.share({
+
 title:"Amir Marketplace",
-text:text,
+
+text:
+"Buy and sell across Kenya 🇰🇪 and Qatar 🇶🇦",
+
 url:location.href
+
 });
 
 }else{
 
-navigator.clipboard.writeText(
-location.href
-);
+navigator.clipboard
+.writeText(location.href)
+.then(function(){
 
 alert("Marketplace link copied.");
 
-}
-
-}
-
-function shareSite(){
-
-if(navigator.share){
-
-navigator.share({
-title:"Amir Marketplace",
-text:"Buy and sell on Amir Marketplace",
-url:location.href
 });
 
-}else{
-
-navigator.clipboard.writeText(
-location.href
-);
-
-alert("Marketplace link copied.");
-
 }
 
 }
 
-function contactAdmin(){
 
-let message=
-"Hello Amir Marketplace Admin, I need assistance.";
+/* FORM OPTIONS */
 
-window.open(
-"https://wa.me/"+CONFIG.adminPhone+
-"?text="+encodeURIComponent(message),
-"_blank"
-);
+document.getElementById("itemCategory")
+.innerHTML=
+categories
+.filter(x=>x!=="All")
+.map(x=>`<option>${x}</option>`)
+.join("");
 
-}
 
-function escapeHTML(text){
+document.getElementById("itemLocation")
+.innerHTML=
+locations
+.map(x=>`<option>${x}</option>`)
+.join("");
 
-return String(text||"").replace(
-/[&<>"']/g,
-function(m){
 
-return {
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-
-}[m];
-
-}
-);
-
-}
+renderCategories();
 
 render();
 
