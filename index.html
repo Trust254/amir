@@ -35,7 +35,7 @@
         .btn-submit { background: #111; color: #fff; flex: 1; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
         .btn-close { background: #ccc; color: #333; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
 
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #ccc; display: flex; justify-content: space-around; padding: 12px 0; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #ccc; display: flex; justify-around: space-around; padding: 12px 0; }
         .nav-link { color: #333; text-decoration: none; font-size: 12px; font-weight: bold; }
     </style>
 </head>
@@ -51,33 +51,21 @@
     <div class="container">
         <div class="product-grid" id="productGrid">
             
-            <!-- VERIFIED ITEM 1 (Example Cap) -->
+            <!-- VERIFIED CARD EXAMPLE WITH 10% FEE -->
             <div class="card">
                 <img src="Screenshot_20260827_113014.jpg" alt="Men's Cap">
                 <div class="card-details">
                     <div class="card-title">Men's Outdoor Cap</div>
-                    <div class="price-tag">KSh 1,224</div>
-                    <div class="fee-badge">Includes 2% Maint. Fee</div>
+                    <div class="price-tag">KSh 1,320</div>
+                    <div class="fee-badge">Includes 10% Admin Fee</div>
                 </div>
                 <div class="actions">
-                    <button class="btn btn-buy" onclick="buyItem('Men\'s Outdoor Cap', '1224')">Buy Now</button>
+                    <button class="btn btn-buy" onclick="buyItem('Men\'s Outdoor Cap', '1320')">Buy Now</button>
                     <button class="btn btn-share" onclick="shareSite()">Share</button>
                 </div>
             </div>
 
-            <!-- APPROVED ITEMS WILL BE PASTED BY ADMIN HERE -->
-<div class="card">
-    <img src="Screenshot_20260827_113014.jpg" alt="Product">
-    <div class="card-details">
-        <div class="card-title">Men's Cap</div>
-        <div class="price-tag">KSh 1,224</div>
-        <div class="fee-badge">Includes 2% Maint. Fee</div>
-    </div>
-    <div class="actions">
-        <button class="btn btn-buy" onclick="buyItem('Men\'s Cap', '1224')">Buy Now</button>
-        <button class="btn btn-share" onclick="shareSite()">Share</button>
-    </div>
-</div>
+            <!-- APPROVED ITEMS PASTED BY ADMIN BELOW HERE -->
 
         </div>
     </div>
@@ -91,19 +79,19 @@
                 <input type="text" id="itemName" placeholder="e.g. Leather Jacket">
             </div>
             <div class="form-group">
-                <label>Your Selling Price (KSh)</label>
+                <label>Your Asking Price (KSh)</label>
                 <input type="number" id="itemPrice" placeholder="1000" oninput="calculatePrice()">
             </div>
             <div class="form-group">
-                <label>Listed Price (+2% Admin/Sharon Fee):</label>
+                <label>Store Price (+10% Admin/Sharon Fee):</label>
                 <input type="text" id="finalPriceDisplay" readonly placeholder="KSh 0">
             </div>
             <div class="form-group">
-                <label>Image Filename Uploaded to GitHub</label>
-                <input type="text" id="itemImage" placeholder="e.g. cap.jpg">
+                <label>Select Product Image from Phone</label>
+                <input type="file" id="itemImageFile" accept="image/*">
             </div>
             <div class="modal-btns">
-                <button class="btn-submit" onclick="submitForVerification()">Send to Admin WhatsApp</button>
+                <button class="btn-submit" onclick="submitForVerification()">Notify Admin via WhatsApp</button>
                 <button class="btn-close" onclick="closeModal()">Cancel</button>
             </div>
         </div>
@@ -118,49 +106,53 @@
 
     <script>
         const SHARON_WHATSAPP = "254719222390";
-        const ADMIN_WHATSAPP = "254795653284";
+        const ADMIN_PRIMARY = "254795653284";
+        const ADMIN_SECONDARY = "97451231379";
 
         function openModal() { document.getElementById('sellModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('sellModal').style.display = 'none'; }
 
         function calculatePrice() {
             const basePrice = parseFloat(document.getElementById('itemPrice').value) || 0;
-            const finalPrice = basePrice * 1.02; // Automatic 2% Markup
+            const finalPrice = basePrice * 1.10; // 10% Admin & Maintenance Fee
             document.getElementById('finalPriceDisplay').value = "KSh " + finalPrice.toFixed(2);
         }
 
         function submitForVerification() {
             const name = document.getElementById('itemName').value;
             const basePrice = parseFloat(document.getElementById('itemPrice').value) || 0;
-            const finalPrice = (basePrice * 1.02).toFixed(2);
-            const fee = (basePrice * 0.02).toFixed(2);
-            const img = document.getElementById('itemImage').value;
+            const finalPrice = (basePrice * 1.10).toFixed(2);
+            const feeAmount = (basePrice * 0.10).toFixed(2);
+            const fileInput = document.getElementById('itemImageFile');
 
-            if (!name || !basePrice || !img) {
-                alert("Please fill out all fields.");
+            if (!name || !basePrice || fileInput.files.length === 0) {
+                alert("Please complete all fields and select an image file.");
                 return;
             }
 
-            const message = `*NEW ITEM SUBMISSION FOR APPROVAL*%0A%0A` +
+            const fileName = fileInput.files[0].name;
+
+            const message = `*NEW LISTING NOTIFICATION (10% FEE)*%0A%0A` +
                 `*Item:* ${encodeURIComponent(name)}%0A` +
                 `*Seller Price:* KSh ${basePrice}%0A` +
-                `*Store Price (+2%):* KSh ${finalPrice}%0A` +
-                `*Sharon Maintenance Fee:* KSh ${fee}%0A` +
-                `*Image File:* ${img}%0A%0A` +
-                `Admins (+254795653284 / +254719222390), please verify payment and add to GitHub!`;
+                `*Store Price (+10%):* KSh ${finalPrice}%0A` +
+                `*Sharon/Admin Fee (10%):* KSh ${feeAmount}%0A` +
+                `*Selected Image:* ${encodeURIComponent(fileName)}%0A%0A` +
+                `_Admins (+254795653284 / +254719222390 / +97451231379), please verify payment and approve code._`;
 
+            // Triggers WhatsApp notification to Sharon's phone immediately
             window.open(`https://wa.me/${SHARON_WHATSAPP}?text=${message}`, '_blank');
             closeModal();
         }
 
         function buyItem(name, price) {
-            const message = `Hello, I want to purchase: *${encodeURIComponent(name)}* listed at *KSh ${price}*. Please verify payment and seller connection.`;
-            window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${message}`, '_blank');
+            const message = `Hello Admin, I am ready to buy: *${encodeURIComponent(name)}* listed at *KSh ${price}*. Please provide payment details.`;
+            window.open(`https://wa.me/${ADMIN_PRIMARY}?text=${message}`, '_blank');
         }
 
         function shareSite() {
             if (navigator.share) {
-                navigator.share({ title: 'Amir Store', text: 'Shop directly on Amir Store Online!', url: window.location.href });
+                navigator.share({ title: 'Amir Marketplace', text: 'Shop directly on Amir Marketplace!', url: window.location.href });
             } else {
                 navigator.clipboard.writeText(window.location.href);
                 alert("Store link copied to clipboard!");
