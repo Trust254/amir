@@ -1,163 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amir Marketplace</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #f4f4f4; padding-bottom: 80px; }
-        
-        .header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .header h1 { font-size: 18px; font-weight: bold; }
-        .header-btns button { background: #25D366; color: #fff; border: none; padding: 8px 14px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        
-        .container { padding: 15px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-        .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; }
-        .card img { width: 100%; height: 160px; object-fit: cover; background: #eee; }
-        .card-details { padding: 10px; }
-        .card-title { font-size: 14px; font-weight: bold; color: #333; margin-bottom: 4px; }
-        .price-tag { font-size: 15px; color: #e62e00; font-weight: bold; }
-        .fee-badge { font-size: 10px; color: #666; background: #eee; padding: 2px 4px; border-radius: 3px; display: inline-block; margin-top: 2px; }
-        .actions { padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; }
-        .btn { flex: 1; padding: 8px; border: none; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; text-align: center; }
-        .btn-buy { background: #25D366; color: #fff; }
-        .btn-share { background: #007bff; color: #fff; }
-        
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; }
-        .modal-content { background: #fff; padding: 20px; border-radius: 8px; width: 90%; max-width: 400px; }
-        .modal-content h2 { margin-bottom: 15px; font-size: 16px; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { font-size: 12px; font-weight: bold; display: block; margin-bottom: 4px; }
-        .form-group input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        .modal-btns { display: flex; gap: 10px; margin-top: 15px; }
-        .btn-submit { background: #111; color: #fff; flex: 1; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
-        .btn-close { background: #ccc; color: #333; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>Amir Marketplace</title>
 
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #ccc; display: flex; justify-around: space-around; padding: 12px 0; }
-        .nav-link { color: #333; text-decoration: none; font-size: 12px; font-weight: bold; }
-    </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f6f8;color:#171717;
+padding-bottom:75px
+}
+header{
+position:sticky;top:0;z-index:100;
+background:#111;color:white;
+padding:13px 16px;
+display:flex;align-items:center;
+justify-content:space-between
+}
+.logo{font-size:21px;font-weight:900}
+.logo span{color:#25d366}
+.post{
+border:0;background:#25d366;color:white;
+padding:10px 14px;border-radius:8px;
+font-weight:bold
+}
+.container{max-width:1100px;margin:auto;padding:15px}
+.hero{
+background:linear-gradient(135deg,#111,#292929);
+color:white;padding:23px 18px;border-radius:16px;
+margin-bottom:15px
+}
+.hero h1{font-size:26px;margin-bottom:7px}
+.hero p{color:#ddd}
+.search{
+width:100%;margin-top:16px;padding:14px;
+border:0;border-radius:10px;font-size:15px
+}
+.categories{
+display:flex;gap:8px;overflow:auto;padding:3px 0 15px
+}
+.category{
+white-space:nowrap;border:0;background:white;
+padding:9px 14px;border-radius:20px;
+box-shadow:0 2px 6px #0001;font-weight:bold
+}
+.category.active{background:#111;color:white}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(165px,1fr));
+gap:13px
+}
+.card{
+background:white;border-radius:13px;
+overflow:hidden;box-shadow:0 2px 8px #00000012
+}
+.card img{
+width:100%;height:175px;
+object-fit:cover;background:#eee
+}
+.details{padding:11px}
+.title{font-weight:800;font-size:14px}
+.price{
+font-size:18px;font-weight:900;
+color:#e53900;margin-top:6px
+}
+.meta{font-size:11px;color:#777;margin-top:4px}
+.buttons{
+display:flex;gap:6px;padding:10px;
+border-top:1px solid #eee
+}
+.btn{
+flex:1;padding:10px;border:0;
+border-radius:7px;font-weight:bold
+}
+.buy{background:#25d366;color:white}
+.share{background:#1479ff;color:white}
+.modal{
+display:none;position:fixed;inset:0;
+background:#0009;z-index:300;
+align-items:center;justify-content:center;
+padding:15px
+}
+.modalBox{
+background:white;border-radius:15px;
+padding:19px;width:100%;max-width:440px;
+max-height:92vh;overflow:auto
+}
+.modalBox h2{margin-bottom:12px}
+.field{margin:12px 0}
+.field label{
+display:block;font-size:12px;
+font-weight:bold;margin-bottom:5px
+}
+.field input,.field textarea,.field select{
+width:100%;padding:11px;
+border:1px solid #ccc;border-radius:8px
+}
+.total{
+background:#f1f1f1;padding:12px;
+border-radius:9px;margin:10px 0
+}
+.total div{
+display:flex;justify-content:space-between;
+margin:5px 0
+}
+.total .grand{
+font-size:18px;font-weight:900;
+border-top:1px solid #ccc;padding-top:8px
+}
+.payment{
+border:2px solid #25d366;
+border-radius:10px;padding:12px;
+margin:12px 0
+}
+.mpesa{
+font-size:18px;font-weight:900;color:#138a45
+}
+.action{
+width:100%;padding:13px;border:0;
+border-radius:8px;background:#111;
+color:white;font-weight:bold
+}
+.close{
+background:#ddd;color:#222;
+margin-top:7px
+}
+.notice{
+background:#fff8df;
+padding:10px;border-radius:8px;
+font-size:12px;color:#765900
+}
+footer{
+position:fixed;bottom:0;left:0;right:0;
+height:65px;background:white;
+border-top:1px solid #ddd;
+display:flex;justify-content:space-around;
+align-items:center;z-index:150
+}
+footer button{
+border:0;background:none;font-weight:bold
+}
+.empty{
+grid-column:1/-1;
+text-align:center;padding:40px;color:#777
+}
+</style>
 </head>
+
 <body>
 
-    <div class="header">
-        <h1>Amir Store</h1>
-        <div class="header-btns">
-            <button onclick="openModal()">+ Post Item</button>
-        </div>
-    </div>
+<header>
+<div class="logo">AMIR<span> MARKET</span></div>
+<button class="post" onclick="openSell()">+ Sell</button>
+</header>
 
-    <div class="container">
-        <div class="product-grid" id="productGrid">
-            
-            <!-- VERIFIED CARD EXAMPLE WITH 10% FEE -->
-            <div class="card">
-                <img src="Screenshot_20260827_113014.jpg" alt="Men's Cap">
-                <div class="card-details">
-                    <div class="card-title">Men's Outdoor Cap</div>
-                    <div class="price-tag">KSh 1,320</div>
-                    <div class="fee-badge">Includes 10% Admin Fee</div>
-                </div>
-                <div class="actions">
-                    <button class="btn btn-buy" onclick="buyItem('Men\'s Outdoor Cap', '1320')">Buy Now</button>
-                    <button class="btn btn-share" onclick="shareSite()">Share</button>
-                </div>
-            </div>
+<div class="container">
 
-            <!-- APPROVED ITEMS PASTED BY ADMIN BELOW HERE -->
+<section class="hero">
+<h1>Buy & Sell Easily</h1>
+<p>Find products, contact the admin and complete your purchase securely.</p>
+<input id="search" class="search"
+placeholder="🔎 Search phones, cars, clothes, furniture..."
+oninput="render()">
+</section>
 
-        </div>
-    </div>
+<div class="categories">
+<button class="category active" onclick="setCategory('All',this)">All</button>
+<button class="category" onclick="setCategory('Phones',this)">📱 Phones</button>
+<button class="category" onclick="setCategory('Vehicles',this)">🚗 Vehicles</button>
+<button class="category" onclick="setCategory('Electronics',this)">💻 Electronics</button>
+<button class="category" onclick="setCategory('Clothes',this)">👕 Clothes</button>
+<button class="category" onclick="setCategory('Furniture',this)">🛋️ Furniture</button>
+<button class="category" onclick="setCategory('Property',this)">🏠 Property</button>
+</div>
 
-    <!-- Seller Submission Form -->
-    <div class="modal" id="sellModal">
-        <div class="modal-content">
-            <h2>Post Item for Admin Approval</h2>
-            <div class="form-group">
-                <label>Item Name</label>
-                <input type="text" id="itemName" placeholder="e.g. Leather Jacket">
-            </div>
-            <div class="form-group">
-                <label>Your Asking Price (KSh)</label>
-                <input type="number" id="itemPrice" placeholder="1000" oninput="calculatePrice()">
-            </div>
-            <div class="form-group">
-                <label>Store Price (+10% Admin/Sharon Fee):</label>
-                <input type="text" id="finalPriceDisplay" readonly placeholder="KSh 0">
-            </div>
-            <div class="form-group">
-                <label>Select Product Image from Phone</label>
-                <input type="file" id="itemImageFile" accept="image/*">
-            </div>
-            <div class="modal-btns">
-                <button class="btn-submit" onclick="submitForVerification()">Notify Admin via WhatsApp</button>
-                <button class="btn-close" onclick="closeModal()">Cancel</button>
-            </div>
-        </div>
-    </div>
+<div id="grid" class="grid"></div>
 
-    <div class="bottom-nav">
-        <a href="#" class="nav-link">Home</a>
-        <a href="#" class="nav-link" onclick="openModal()">Sell Item</a>
-        <a href="mailto:abdiabdulmohammed50@gmail.com" class="nav-link">Email Us</a>
-        <a href="#" class="nav-link" onclick="shareSite()">Share Store</a>
-    </div>
+</div>
 
-    <script>
-        const SHARON_WHATSAPP = "254719222390";
-        const ADMIN_PRIMARY = "254795653284";
-        const ADMIN_SECONDARY = "97451231379";
+<!-- SELL MODAL -->
 
-        function openModal() { document.getElementById('sellModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('sellModal').style.display = 'none'; }
+<div id="sellModal" class="modal">
+<div class="modalBox">
 
-        function calculatePrice() {
-            const basePrice = parseFloat(document.getElementById('itemPrice').value) || 0;
-            const finalPrice = basePrice * 1.10; // 10% Admin & Maintenance Fee
-            document.getElementById('finalPriceDisplay').value = "KSh " + finalPrice.toFixed(2);
-        }
+<h2>Sell Your Item</h2>
 
-        function submitForVerification() {
-            const name = document.getElementById('itemName').value;
-            const basePrice = parseFloat(document.getElementById('itemPrice').value) || 0;
-            const finalPrice = (basePrice * 1.10).toFixed(2);
-            const feeAmount = (basePrice * 0.10).toFixed(2);
-            const fileInput = document.getElementById('itemImageFile');
+<div class="notice">
+Your item will be submitted to the admin for approval.
+The marketplace adds a 10% admin fee to your asking price.
+</div>
 
-            if (!name || !basePrice || fileInput.files.length === 0) {
-                alert("Please complete all fields and select an image file.");
-                return;
-            }
+<div class="field">
+<label>Product Name</label>
+<input id="sellName" placeholder="Example: iPhone 15 Pro">
+</div>
 
-            const fileName = fileInput.files[0].name;
+<div class="field">
+<label>Category</label>
+<select id="sellCategory">
+<option>Phones</option>
+<option>Vehicles</option>
+<option>Electronics</option>
+<option>Clothes</option>
+<option>Furniture</option>
+<option>Property</option>
+<option>Other</option>
+</select>
+</div>
 
-            const message = `*NEW LISTING NOTIFICATION (10% FEE)*%0A%0A` +
-                `*Item:* ${encodeURIComponent(name)}%0A` +
-                `*Seller Price:* KSh ${basePrice}%0A` +
-                `*Store Price (+10%):* KSh ${finalPrice}%0A` +
-                `*Sharon/Admin Fee (10%):* KSh ${feeAmount}%0A` +
-                `*Selected Image:* ${encodeURIComponent(fileName)}%0A%0A` +
-                `_Admins (+254795653284 / +254719222390 / +97451231379), please verify payment and approve code._`;
+<div class="field">
+<label>Description</label>
+<textarea id="sellDescription" rows="3"
+placeholder="Describe your item"></textarea>
+</div>
 
-            // Triggers WhatsApp notification to Sharon's phone immediately
-            window.open(`https://wa.me/${SHARON_WHATSAPP}?text=${message}`, '_blank');
-            closeModal();
-        }
+<div class="field">
+<label>Your Asking Price — KSh</label>
+<input id="sellPrice" type="number" min="1"
+oninput="calculateSell()">
+</div>
 
-        function buyItem(name, price) {
-            const message = `Hello Admin, I am ready to buy: *${encodeURIComponent(name)}* listed at *KSh ${price}*. Please provide payment details.`;
-            window.open(`https://wa.me/${ADMIN_PRIMARY}?text=${message}`, '_blank');
-        }
+<div class="total">
+<div><span>Your price</span><b id="sellerPrice">KSh 0</b></div>
+<div><span>Admin fee 10%</span><b id="adminFee">KSh 0</b></div>
+<div class="grand"><span>Customer price</span><b id="customerPrice">KSh 0</b></div>
+</div>
 
-        function shareSite() {
-            if (navigator.share) {
-                navigator.share({ title: 'Amir Marketplace', text: 'Shop directly on Amir Marketplace!', url: window.location.href });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert("Store link copied to clipboard!");
-            }
-        }
-    </script>
+<div class="field">
+<label>Your Name</label>
+<input id="sellerName" placeholder="Seller name">
+</div>
+
+<div class="field">
+<label>Your Phone</label>
+<input id="sellerPhone" placeholder="07XXXXXXXX">
+</div>
+
+<div class="field">
+<label>Product Image</label>
+<input id="sellImage" type="file" accept="image/*">
+</div>
+
+<button class="action" onclick="submitListing()">
+SUBMIT FOR ADMIN APPROVAL
+</button>
+
+<button class="action close" onclick="closeModal('sellModal')">
+CANCEL
+</button>
+
+</div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+
+<div id="checkoutModal" class="modal">
+<div class="modalBox">
+
+<h2>Checkout</h2>
+
+<div id="checkoutProduct"></div>
+
+<div class="total">
+<div><span>Product</span><b id="checkoutBase"></b></div>
+<div><span>Admin fee</span><b id="checkoutFee"></b></div>
+<div class="grand"><span>Total</span><b id="checkoutTotal"></b></div>
+</div>
+
+<div class="field">
+<label>Your Name</label>
+<input id="buyerName" placeholder="Full name">
+</div>
+
+<div class="field">
+<label>M-PESA Phone Number</label>
+<input id="buyerPhone" placeholder="07XXXXXXXX">
+</div>
+
+<div class="payment">
+<div class="mpesa">🟢 M-PESA PAYMENT</div>
+<p style="font-size:12px;margin-top:7px">
+Enter your M-PESA number above. In the production version,
+the secure backend will send an STK Push to your phone.
+</p>
+</div>
+
+<div class="field">
+<label>M-PESA Transaction Reference</label>
+<input id="transactionRef"
+placeholder="Example: QJK1234567">
+</div>
+
+<button class="action" onclick="submitOrder()">
+CONFIRM PAYMENT
+</button>
+
+<button class="action close"
+onclick="closeModal('checkoutModal')">
+CANCEL
+</button>
+
+</div>
+</div>
+
+<footer>
+<button onclick="window.scrollTo(0,0)">🏠 Home</button>
+<button onclick="openSell()">➕ Sell</button>
+<button onclick="contactAdmin()">💬 Admin</button>
+<button onclick="shareSite()">📤 Share</button>
+</footer>
+
+<script>
+
+const CONFIG={
+adminEmail:"abdiabdulmohammed50@gmail.com",
+adminPhone:"254795653284",
+adminFee:0.10
+};
+
+let selectedCategory="All";
+let selectedProduct=null;
+
+let products=JSON.parse(
+localStorage.getItem("amir_products")||"[]"
+);
+
+if(products.length===0){
+
+products=[
+{
+id:1,
+name:"Men's Outdoor Cap",
+category:"Clothes",
+description:"Quality outdoor cap",
+basePrice:1200,
+customerPrice:1320,
+image:"",
+approved:true
+}
+];
+
+saveProducts();
+}
+
+function saveProducts(){
+localStorage.setItem(
+"amir_products",
+JSON.stringify(products)
+);
+}
+
+function money(value){
+return "KSh "+Number(value).toLocaleString(
+"en-KE",
+{minimumFractionDigits:0}
+);
+}
+
+function openSell(){
+document.getElementById("sellModal").style.display="flex";
+}
+
+function closeModal(id){
+document.getElementById(id).style.display="none";
+}
+
+function calculateSell(){
+
+let price=Number(
+document.getElementById("sellPrice").value
+)||0;
+
+let fee=price*CONFIG.adminFee;
+let total=price+fee;
+
+document.getElementById("sellerPrice").textContent=money(price);
+document.getElementById("adminFee").textContent=money(fee);
+document.getElementById("customerPrice").textContent=money(total);
+
+}
+
+function submitListing(){
+
+let name=document.getElementById("sellName").value.trim();
+let category=document.getElementById("sellCategory").value;
+let description=document.getElementById("sellDescription").value.trim();
+let price=Number(document.getElementById("sellPrice").value);
+let seller=document.getElementById("sellerName").value.trim();
+let phone=document.getElementById("sellerPhone").value.trim();
+let file=document.getElementById("sellImage").files[0];
+
+if(!name||!price||!seller||!phone||!file){
+
+alert("Please complete all required fields and select a product image.");
+return;
+
+}
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let product={
+
+id:Date.now(),
+name,
+category,
+description,
+basePrice:price,
+customerPrice:price+(price*CONFIG.adminFee),
+seller,
+sellerPhone:phone,
+image:reader.result,
+approved:false
+
+};
+
+products.push(product);
+saveProducts();
+
+let message=
+`NEW AMIR MARKETPLACE LISTING
+
+Item: ${name}
+Category: ${category}
+Seller price: KSh ${price}
+Admin fee: KSh ${(price*CONFIG.adminFee).toFixed(2)}
+Customer price: KSh ${(price*(1+CONFIG.adminFee)).toFixed(2)}
+
+Seller: ${seller}
+Phone: ${phone}
+
+Please review and approve this listing.`;
+
+window.open(
+"https://wa.me/"+CONFIG.adminPhone+
+"?text="+encodeURIComponent(message),
+"_blank"
+);
+
+closeModal("sellModal");
+
+alert(
+"Listing submitted successfully. The admin must approve it before it appears in the marketplace."
+);
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+function render(){
+
+let query=document.getElementById("search")
+.value.toLowerCase();
+
+let visible=products.filter(p=>{
+
+let approved=p.approved===true;
+
+let categoryMatch=
+selectedCategory==="All"||
+p.category===selectedCategory;
+
+let searchMatch=
+(p.name+" "+p.category+" "+p.description)
+.toLowerCase()
+.includes(query);
+
+return approved&&categoryMatch&&searchMatch;
+
+});
+
+if(!visible.length){
+
+document.getElementById("grid").innerHTML=
+'<div class="empty">No products found.</div>';
+
+return;
+
+}
+
+document.getElementById("grid").innerHTML=
+visible.map(p=>`
+
+<div class="card">
+
+<img src="${
+p.image||
+"https://via.placeholder.com/500x400?text=Amir+Marketplace"
+}">
+
+<div class="details">
+
+<div class="title">
+${escapeHTML(p.name)}
+</div>
+
+<div class="price">
+${money(p.customerPrice)}
+</div>
+
+<div class="meta">
+${escapeHTML(p.category)}
+</div>
+
+<div class="meta">
+Includes 10% admin fee
+</div>
+
+<div class="meta">
+${escapeHTML(p.description||"")}
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="btn buy"
+onclick="openCheckout(${p.id})">
+💳 Buy
+</button>
+
+<button class="btn share"
+onclick="shareProduct(${p.id})">
+📤 Share
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+function openCheckout(id){
+
+selectedProduct=
+products.find(p=>p.id===id);
+
+if(!selectedProduct)return;
+
+document.getElementById("checkoutProduct")
+.innerHTML=
+"<b>"+escapeHTML(selectedProduct.name)+"</b>";
+
+document.getElementById("checkoutBase")
+.textContent=
+money(selectedProduct.basePrice);
+
+document.getElementById("checkoutFee")
+.textContent=
+money(
+selectedProduct.basePrice*CONFIG.adminFee
+);
+
+document.getElementById("checkoutTotal")
+.textContent=
+money(selectedProduct.customerPrice);
+
+document.getElementById("checkoutModal")
+.style.display="flex";
+
+}
+
+function submitOrder(){
+
+if(!selectedProduct)return;
+
+let name=
+document.getElementById("buyerName")
+.value.trim();
+
+let phone=
+document.getElementById("buyerPhone")
+.value.trim();
+
+let reference=
+document.getElementById("transactionRef")
+.value.trim();
+
+if(!name||!phone||!reference){
+
+alert(
+"Please enter your name, M-PESA phone number and transaction reference."
+);
+
+return;
+
+}
+
+let message=
+`AMIR MARKETPLACE PAYMENT
+
+Product: ${selectedProduct.name}
+
+Amount: KSh ${selectedProduct.customerPrice}
+
+Buyer: ${name}
+Buyer Phone: ${phone}
+
+M-PESA Reference: ${reference}
+
+Please verify my payment and connect me with the seller.`;
+
+window.open(
+"https://wa.me/"+CONFIG.adminPhone+
+"?text="+encodeURIComponent(message),
+"_blank"
+);
+
+closeModal("checkoutModal");
+
+alert(
+"Order submitted. The admin will verify the M-PESA payment."
+);
+
+}
+
+function setCategory(category,button){
+
+selectedCategory=category;
+
+document
+.querySelectorAll(".category")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+render();
+
+}
+
+function shareProduct(id){
+
+let p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+let text=
+"Check this item on Amir Marketplace: "+
+p.name+" — "+money(p.customerPrice);
+
+if(navigator.share){
+
+navigator.share({
+title:"Amir Marketplace",
+text:text,
+url:location.href
+});
+
+}else{
+
+navigator.clipboard.writeText(
+location.href
+);
+
+alert("Marketplace link copied.");
+
+}
+
+}
+
+function shareSite(){
+
+if(navigator.share){
+
+navigator.share({
+title:"Amir Marketplace",
+text:"Buy and sell on Amir Marketplace",
+url:location.href
+});
+
+}else{
+
+navigator.clipboard.writeText(
+location.href
+);
+
+alert("Marketplace link copied.");
+
+}
+
+}
+
+function contactAdmin(){
+
+let message=
+"Hello Amir Marketplace Admin, I need assistance.";
+
+window.open(
+"https://wa.me/"+CONFIG.adminPhone+
+"?text="+encodeURIComponent(message),
+"_blank"
+);
+
+}
+
+function escapeHTML(text){
+
+return String(text||"").replace(
+/[&<>"']/g,
+function(m){
+
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m];
+
+}
+);
+
+}
+
+render();
+
+</script>
+
 </body>
 </html>
