@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Store Online</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f9; color: #333; }
+        header { background: #111; color: #fff; padding: 15px; text-align: center; border-radius: 8px; }
+        .container { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        button:hover { background: #218838; }
+        .price-preview { font-size: 18px; font-weight: bold; color: #007bff; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Amir Store Online</h1>
+</header>
+
+<div class="container">
+    <h2>Post an Item for Sale</h2>
+    <form id="itemForm">
+        <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName" required placeholder="e.g. iPhone 13">
+        </div>
+        <div class="form-group">
+            <label for="basePrice">Your Selling Price (KSh)</label>
+            <input type="number" id="basePrice" required placeholder="e.g. 5000" oninput="calculatePrice()">
+        </div>
+        <div class="price-preview" id="displayPrice">Listing Price: KSh 0</div>
+        <br>
+        <button type="button" onclick="submitToWhatsApp()">Post Item via WhatsApp</button>
+    </form>
+</div>
+
+<script>
+    function calculatePrice() {
+        const base = parseFloat(document.getElementById('basePrice').value) || 0;
+        const finalPrice = base * 1.5; // 50% admin markup
+        document.getElementById('displayPrice').innerText = `Listing Price: KSh ${finalPrice.toLocaleString()}`;
+    }
+
+    function submitToWhatsApp() {
+        const name = document.getElementById('itemName').value;
+        const base = parseFloat(document.getElementById('basePrice').value) || 0;
+        if (!name || !base) {
+            alert('Please fill in all fields');
+            return;
+        }
+        const finalPrice = base * 1.5;
+        const msg = `Hello Admin, I want to list an item on Amir Store Online:%0A- *Item:* ${name}%0A- *My Price:* KSh ${base}%0A- *Listing Price (50% markup):* KSh ${finalPrice}`;
+        window.open(`https://wa.me/254795653284?text=${msg}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
